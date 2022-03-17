@@ -68,6 +68,9 @@ table td, table td {
 #TicketBoard .estar {
     border-color:#feedaa;
 }
+#TicketBoard .lstar {
+  border-color:#aafeae;
+}
 
 /* Android 2.3 :checked fix */
 @-webkit-keyframes fake {

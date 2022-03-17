@@ -28,29 +28,78 @@
                                 <th></th>
                             </tr>
                             <tr>
-                                <td>
-                                    <input type="number" value="1" v-model="L_rangeMin"/>
-                                </td>
-                                <td>
-                                    <input type="number" value="59" v-model="L_rangeMax"/>
-                                </td>
-                                <td>
-                                    <input type="number" value="6" v-model="L_rangeSize"/>
-                                </td>
-                                <td>
-                                    <button v-on:click="getLNumbers">Get L Numbers!</button>
-                                </td>
+                                <td><input type="number" v-model="L_rangeMin"/></td>
+                                <td><input type="number" v-model="L_rangeMax"/></td>
+                                <td><input type="number" v-model="L_rangeSize"/></td>
+                                <td><button v-on:click="getLNumbers">Get L Numbers!</button></td>
                             </tr>
                         </table>
                     </div>
                     <div id="tab-two-panel" class="panel">
-                        two
+                        <table>
+                            <tr>
+                                <th>Min</th>
+                                <th>Max</th>
+                                <th>Balls</th>
+                                <th>Star Min</th>
+                                <th>Star Max</th>
+                                <th>Stars</th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <td><input type="number" v-model="E_rangeMin"/></td>
+                                <td><input type="number" v-model="E_rangeMax"/></td>
+                                <td><input type="number" v-model="E_rangeSize"/></td>
+                                <td><input type="number" v-model="E_starMin"/></td>
+                                <td><input type="number" v-model="E_starMax"/></td>
+                                <td><input type="number" v-model="E_starSize"/></td>
+                                <td><button v-on:click="getENumbers">Get E Numbers!</button></td>
+                            </tr>
+                        </table>
                     </div>
                     <div id="tab-three-panel" class="panel">
-                        three
+                        <table>
+                            <tr>
+                                <th>Min</th>
+                                <th>Max</th>
+                                <th>Balls</th>
+                                <th>Star Min</th>
+                                <th>Star Max</th>
+                                <th>Stars</th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <td><input type="number" v-model="T_rangeMin"/></td>
+                                <td><input type="number" v-model="T_rangeMax"/></td>
+                                <td><input type="number" v-model="T_rangeSize"/></td>
+                                <td><input type="number" v-model="T_starMin"/></td>
+                                <td><input type="number" v-model="T_starMax"/></td>
+                                <td><input type="number" v-model="T_starSize"/></td>
+                                <td><button v-on:click="getTNumbers">Get T Numbers!</button></td>
+                            </tr>
+                        </table>
                     </div>
                     <div id="tab-four-panel" class="panel">
-                        four
+                        <table>
+                            <tr>
+                                <th>Min</th>
+                                <th>Max</th>
+                                <th>Balls</th>
+                                <th>Star Min</th>
+                                <th>Star Max</th>
+                                <th>Stars</th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <td><input type="number" v-model="S_rangeMin"/></td>
+                                <td><input type="number" v-model="S_rangeMax"/></td>
+                                <td><input type="number" v-model="S_rangeSize"/></td>
+                                <td><input type="number" v-model="S_starMin"/></td>
+                                <td><input type="number" v-model="S_starMax"/></td>
+                                <td><input type="number" v-model="S_starSize"/></td>
+                                <td><button v-on:click="getSNumbers">Get S Numbers!</button></td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
 
@@ -58,12 +107,6 @@
                 
                 
             </div>
-            <input v-model="greeting" />
-            <button v-on:click="toggleBox">Toggle Boom</button>
-
-            <hr />
-
-            <div v-if="isVisible" class="box">Boom</div>
         </div>
         <script src="vue.js"></script>
         <script>
@@ -72,32 +115,125 @@
                     return {
                         L_rangeSize:  6,
                         L_rangeMin: 1,
-                        L_rangeMax: 59
+                        L_rangeMax: 59,
+
+                        E_rangeSize:  5,
+                        E_rangeMin: 1,
+                        E_rangeMax: 50,
+                        E_starSize:  2,
+                        E_starMin: 1,
+                        E_starMax: 12,
+
+                        T_rangeSize:  5,
+                        T_rangeMin: 1,
+                        T_rangeMax: 39,
+                        T_starSize:  1,
+                        T_starMin: 1,
+                        T_starMax: 14,
+
+                        S_rangeSize:  5,
+                        S_rangeMin: 1,
+                        S_rangeMax: 47,
+                        S_starSize:  1,
+                        S_starMin: 1,
+                        S_starMax: 10
                     }
                 },
                 methods: {
                     getLNumbers() {
                         var numbers = new Array(),
-                        L_ticket = "";
-                        //getRange();
+                            L_ticket = "",
+                            css = "";
 
-                        for (i = 0; i < this.L_rangeSize; i++) {
-                            do {
-                                numbers[i] = this.newNumber(this.L_rangeMin, this.L_rangeMax)
-                            } while (i > 0 && numbers.lastIndexOf(numbers[i], i - 1) >= 0)
-                        }
-                        //return
-                        L_ticket = "<span>";
-                        L_ticket += numbers.sort(function (a, b) { return a - b }).join("</span><span>");
-                        L_ticket += "</span>";
+                        //Get the count of required numbers
+                        this.populateNumberArray(numbers, this.L_rangeSize, this.L_rangeMin, this.L_rangeMax)
 
-                        //console.log(Lotto_ticket);
+                        //sort the numbers and wrap them in markup
+                        L_ticket = this.sortNumbers(numbers, null, css);                      
+
+                        //Write the finished numbers back to the page
                         TicketBoard.innerHTML += (L_ticket + "<br />");
-                        },
-                    newNumber(min, max) {
+                    },
+                    getENumbers() {
+                        var numbers = new Array(),
+                            stars = new Array(),
+                            L_ticket = "",
+                            css = "estar";
+
+                        //Get the count of required numbers
+                        this.populateNumberArray(numbers, this.E_rangeSize, this.E_rangeMin, this.E_rangeMax)
+                        this.populateNumberArray(stars, this.E_starSize, this.E_starMin, this.E_starMax)
+
+                        //sort the numbers and wrap them in markup
+                        L_ticket = this.sortNumbers(numbers, stars, css);                      
+
+                        //Write the finished numbers back to the page
+                        TicketBoard.innerHTML += (L_ticket + "<br />");
+                    },
+                    getTNumbers() {
+                        var numbers = new Array(),
+                            stars = new Array(),
+                            L_ticket = "",
+                            css = "tstar";
+
+                        //Get the count of required numbers
+                        this.populateNumberArray(numbers, this.T_rangeSize, this.T_rangeMin, this.T_rangeMax)
+                        this.populateNumberArray(stars, this.T_starSize, this.T_starMin, this.T_starMax)
+
+                        //sort the numbers and wrap them in markup
+                        L_ticket = this.sortNumbers(numbers, stars, css);                      
+
+                        //Write the finished numbers back to the page
+                        TicketBoard.innerHTML += (L_ticket + "<br />");
+                    },
+                    getSNumbers() {
+                        var numbers = new Array(),
+                            stars = new Array(),
+                            L_ticket = "",
+                            css = "lstar";
+
+                        //Get the count of required numbers
+                        this.populateNumberArray(numbers, this.S_rangeSize, this.S_rangeMin, this.S_rangeMax)
+                        this.populateNumberArray(stars, this.S_starSize, this.S_starMin, this.S_starMax)
+
+                        //sort the numbers and wrap them in markup
+                        L_ticket = this.sortNumbers(numbers, stars, css)               
+
+                        //Write the finished numbers back to the page
+                        TicketBoard.innerHTML += (L_ticket + "<br />");
+                    },
+                    populateNumberArray(arry, size, min, max) {
+                        // loop enough times to get the count of required numbers
+                        for (i = 0; i < size; i++) {
+                            do {
+                                arry[i] = this.generateNumber(min, max)
+                            } while (i > 0 && arry.lastIndexOf(arry[i], i - 1) >= 0)
+                        }
+
+                        return arry;
+                    },
+                    generateNumber(min, max) {
+                        //get a random number inside the min and max range
                         var number = Math.floor(Math.random() * (max - min + 1)) + min;
+
                         return number
+                    },
+                    sortNumbers(numArry, starArry, css) {
+                        //Sort the array of numbers and wrap it in markup
+                        var ticket = "";
+                        ticket = "<span>";
+                        ticket += numArry.sort(function (a, b) { return a - b }).join("</span><span>");
+                        ticket += "</span>";
+                        //If we have a second set of numbers, add those to the ticket
+                        if (starArry != null) {
+                            ticket += "<span class='" + css + "'>";
+                            ticket += starArry.sort(function (a, b) { return a - b }).join("</span><span class='" + css + "'>");
+                            ticket += "</span>";
+                        }
+
+                        return ticket
                     }
+
                 }
             })
             app.mount("#app")
