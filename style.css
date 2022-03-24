@@ -63,13 +63,13 @@ table td, table td {
     left:-5px;
 }
 #TicketBoard .tstar {
-    border-color:#febaba;
+    border-color:#BC13AD;
 }
 #TicketBoard .estar {
-    border-color:#feedaa;
+    border-color:#F8B400;
 }
 #TicketBoard .lstar {
-  border-color:#aafeae;
+  border-color:#00D6DA;
 }
 
 /* Android 2.3 :checked fix */
@@ -122,6 +122,7 @@ table td, table td {
   .ui-tabs {
     margin: 20px auto;
     width: 80%;
+    max-width: 1200px;
     box-shadow: 0 1px 5px rgba(0,0,0,.2);
     background-color: #fff;
     overflow: hidden;
@@ -177,7 +178,39 @@ table td, table td {
     cursor: default;
     border-left-color: #69be28;
   }
+
+  #tab-one:checked ~ .tabs #tab-one-label, #tab-one:hover ~ .tabs #tab-one-label {
+    border-left-color: #E5013B;
+  }
+
+  #tab-two:checked ~ .tabs #tab-two-label, #tab-two:hover ~ .tabs #tab-two-label {
+    border-left-color: #F8B400;
+  }
+  #tab-three:checked ~ .tabs #tab-three-label, #tab-three:hover ~ .tabs #tab-three-label {
+    border-left-color: #BC13AD;
+  }
+  #tab-four:checked ~ .tabs #tab-four-label, #tab-four:hover ~ .tabs #tab-four-label {
+    border-left-color: #00D6DA;
+  }
   
+button {
+  border:none;
+  padding: 10px 20px;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.editBtn {
+  cursor: pointer;
+}
+
+#tab-one-panel button { background-color: #E5013B; color: #eee;}
+#tab-two-panel button { background-color: #F8B400; color: #555;}
+#tab-three-panel button { background-color: #BC13AD; color: #eee;}
+#tab-four-panel button { background-color: #00D6DA; color: #555;}
+
   #tab-one:checked ~ .tabs #tab-one-panel,
   #tab-two:checked ~ .tabs #tab-two-panel,
   #tab-three:checked ~ .tabs #tab-three-panel,
@@ -251,4 +284,8 @@ table td, table td {
     border: 1px solid #888;
     padding: 10px;
     width: 50px;
+  }
+
+  .disclaimer {
+    text-align: center;
   }

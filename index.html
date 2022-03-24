@@ -14,99 +14,121 @@
                 <input class="state" type="radio" title="tab-four" name="tabs-state" id="tab-four" />
 
                 <div class="tabs flex-tabs">
-                    <label for="tab-one" id="tab-one-label" class="tab">Tab 1</label>
-                    <label for="tab-two" id="tab-two-label" class="tab">Tab 2</label>
-                    <label for="tab-three" id="tab-three-label" class="tab">Tab 3</label>
-                    <label for="tab-four" id="tab-four-label" class="tab">Tab 4</label>
+                    <label for="tab-one" id="tab-one-label" class="tab">Lottery</label>
+                    <label for="tab-two" id="tab-two-label" class="tab">Euro</label>
+                    <label for="tab-three" id="tab-three-label" class="tab">Thunder</label>
+                    <label for="tab-four" id="tab-four-label" class="tab">Life</label>
 
                     <div id="tab-one-panel" class="panel">
-                        <table>
-                            <tr>
-                                <th>Min</th>
-                                <th>Max</th>
-                                <th>Balls</th>
-                                <th></th>
-                            </tr>
-                            <tr>
-                                <td><input type="number" v-model="L_rangeMin"/></td>
-                                <td><input type="number" v-model="L_rangeMax"/></td>
-                                <td><input type="number" v-model="L_rangeSize"/></td>
-                                <td><button v-on:click="getLNumbers">Get L Numbers!</button></td>
-                            </tr>
-                        </table>
+                        <div v-show="tab_1_settings">
+                            <table>
+                                <tr>
+                                    <th>Min</th>
+                                    <th>Max</th>
+                                    <th>Balls</th>
+                                </tr>
+                                <tr>
+                                    <td><input type="number" v-model="L_rangeMin"/></td>
+                                    <td><input type="number" v-model="L_rangeMax"/></td>
+                                    <td><input type="number" v-model="L_rangeSize"/></td>
+                                </tr>
+                            </table>
+                        </div>
+                        This will generate <strong>{{ L_rangeSize }}</strong> numbers between <strong>{{ L_rangeMin }}</strong> and <strong>{{ L_rangeMax }}</strong>
+                        &nbsp;
+                        <span class="editBtn" v-on:click="toggleSettings(1)">[edit]</span>
+                        <br /><br />
+                        <button v-on:click="getLNumbers">Get Lottery Numbers!</button>
                     </div>
                     <div id="tab-two-panel" class="panel">
-                        <table>
-                            <tr>
-                                <th>Min</th>
-                                <th>Max</th>
-                                <th>Balls</th>
-                                <th>Star Min</th>
-                                <th>Star Max</th>
-                                <th>Stars</th>
-                                <th></th>
-                            </tr>
-                            <tr>
-                                <td><input type="number" v-model="E_rangeMin"/></td>
-                                <td><input type="number" v-model="E_rangeMax"/></td>
-                                <td><input type="number" v-model="E_rangeSize"/></td>
-                                <td><input type="number" v-model="E_starMin"/></td>
-                                <td><input type="number" v-model="E_starMax"/></td>
-                                <td><input type="number" v-model="E_starSize"/></td>
-                                <td><button v-on:click="getENumbers">Get E Numbers!</button></td>
-                            </tr>
-                        </table>
+                        <div v-show="tab_2_settings">
+                            <table>
+                                <tr>
+                                    <th>Min</th>
+                                    <th>Max</th>
+                                    <th>Balls</th>
+                                    <th>Star Min</th>
+                                    <th>Star Max</th>
+                                    <th>Stars</th>
+                                </tr>
+                                <tr>
+                                    <td><input type="number" v-model="E_rangeMin"/></td>
+                                    <td><input type="number" v-model="E_rangeMax"/></td>
+                                    <td><input type="number" v-model="E_rangeSize"/></td>
+                                    <td><input type="number" v-model="E_starMin"/></td>
+                                    <td><input type="number" v-model="E_starMax"/></td>
+                                    <td><input type="number" v-model="E_starSize"/></td>
+                                </tr>
+                            </table>
+                        </div>
+                        This will generate <strong>{{ E_rangeSize }}</strong> numbers between <strong>{{ E_rangeMin }}</strong> and <strong>{{ E_rangeMax }}</strong> and <strong>{{ E_starSize }}</strong> numbers between <strong>{{ E_starMin }}</strong> and <strong>{{ E_starMax }}</strong>
+                        &nbsp;
+                        <span class="editBtn" v-on:click="toggleSettings(2)">[edit]</span>
+                        <br /><br />
+                        <button v-on:click="getENumbers">Get Euro Numbers!</button>
                     </div>
                     <div id="tab-three-panel" class="panel">
-                        <table>
-                            <tr>
-                                <th>Min</th>
-                                <th>Max</th>
-                                <th>Balls</th>
-                                <th>Star Min</th>
-                                <th>Star Max</th>
-                                <th>Stars</th>
-                                <th></th>
-                            </tr>
-                            <tr>
-                                <td><input type="number" v-model="T_rangeMin"/></td>
-                                <td><input type="number" v-model="T_rangeMax"/></td>
-                                <td><input type="number" v-model="T_rangeSize"/></td>
-                                <td><input type="number" v-model="T_starMin"/></td>
-                                <td><input type="number" v-model="T_starMax"/></td>
-                                <td><input type="number" v-model="T_starSize"/></td>
-                                <td><button v-on:click="getTNumbers">Get T Numbers!</button></td>
-                            </tr>
-                        </table>
+                        <div v-show="tab_3_settings">
+                            <table>
+                                <tr>
+                                    <th>Min</th>
+                                    <th>Max</th>
+                                    <th>Balls</th>
+                                    <th>Star Min</th>
+                                    <th>Star Max</th>
+                                    <th>Stars</th>
+                                </tr>
+                                <tr>
+                                    <td><input type="number" v-model="T_rangeMin"/></td>
+                                    <td><input type="number" v-model="T_rangeMax"/></td>
+                                    <td><input type="number" v-model="T_rangeSize"/></td>
+                                    <td><input type="number" v-model="T_starMin"/></td>
+                                    <td><input type="number" v-model="T_starMax"/></td>
+                                    <td><input type="number" v-model="T_starSize"/></td>
+                                </tr>
+                            </table>
+                        </div>
+                        This will generate <strong>{{ T_rangeSize }}</strong> numbers between <strong>{{ T_rangeMin }}</strong> and <strong>{{ T_rangeMax }}</strong> and <strong>{{ T_starSize }}</strong> numbers between <strong>{{ T_starMin }}</strong> and <strong>{{ T_starMax }}</strong>
+                        &nbsp;
+                        <span class="editBtn" v-on:click="toggleSettings(3)">[edit]</span>
+                        <br /><br />
+                        <button v-on:click="getTNumbers">Get Thunder Numbers!</button>
                     </div>
                     <div id="tab-four-panel" class="panel">
-                        <table>
-                            <tr>
-                                <th>Min</th>
-                                <th>Max</th>
-                                <th>Balls</th>
-                                <th>Star Min</th>
-                                <th>Star Max</th>
-                                <th>Stars</th>
-                                <th></th>
-                            </tr>
-                            <tr>
-                                <td><input type="number" v-model="S_rangeMin"/></td>
-                                <td><input type="number" v-model="S_rangeMax"/></td>
-                                <td><input type="number" v-model="S_rangeSize"/></td>
-                                <td><input type="number" v-model="S_starMin"/></td>
-                                <td><input type="number" v-model="S_starMax"/></td>
-                                <td><input type="number" v-model="S_starSize"/></td>
-                                <td><button v-on:click="getSNumbers">Get S Numbers!</button></td>
-                            </tr>
-                        </table>
+                        <div v-show="tab_4_settings">
+                            <table>
+                                <tr>
+                                    <th>Min</th>
+                                    <th>Max</th>
+                                    <th>Balls</th>
+                                    <th>Star Min</th>
+                                    <th>Star Max</th>
+                                    <th>Stars</th>
+                                </tr>
+                                <tr>
+                                    <td><input type="number" v-model="S_rangeMin"/></td>
+                                    <td><input type="number" v-model="S_rangeMax"/></td>
+                                    <td><input type="number" v-model="S_rangeSize"/></td>
+                                    <td><input type="number" v-model="S_starMin"/></td>
+                                    <td><input type="number" v-model="S_starMax"/></td>
+                                    <td><input type="number" v-model="S_starSize"/></td>
+                                </tr>
+                            </table>
+                        </div>
+                        This will generate <strong>{{ S_rangeSize }}</strong> numbers between <strong>{{ S_rangeMin }}</strong> and <strong>{{ S_rangeMax }}</strong> and <strong>{{ S_starSize }}</strong> numbers between <strong>{{ S_starMin }}</strong> and <strong>{{ S_starMax }}</strong>
+                        &nbsp;
+                        <span class="editBtn" v-on:click="toggleSettings(4)">[edit]</span>
+                        <br /><br />
+                        
+                        <button v-on:click="getSNumbers">Get Life Numbers!</button>
                     </div>
                 </div>
 
                 <div id="TicketBoard"></div>
-                
-                
+       
             </div>
+            <div class="disclaimer">This webpage is not in any way endorsed or associated with any lottery or gambling organisations, and is for amusement purposes only. <a href="https://www.begambleaware.org/" target="_blank">Be Gamble Aware</a>.</div>
+         
         </div>
         <script src="vue.js"></script>
         <script>
@@ -136,10 +158,33 @@
                         S_rangeMax: 47,
                         S_starSize:  1,
                         S_starMin: 1,
-                        S_starMax: 10
+                        S_starMax: 10,
+
+                        tab_1_settings: false,
+                        tab_2_settings: false,
+                        tab_3_settings: false,
+                        tab_4_settings: false
                     }
                 },
                 methods: {
+                    toggleSettings(game) {
+                        switch (game) {
+                            case 1:
+                            this.tab_1_settings = !this.tab_1_settings;
+                                break;
+                            case 2:
+                            this.tab_2_settings = !this.tab_2_settings;
+                                break;
+                            case 3:
+                            this.tab_3_settings = !this.tab_3_settings;
+                                break;
+                            case 4:
+                            this.tab_4_settings = !this.tab_4_settings;
+                                break;
+                            default:
+                                break;
+                        }    
+                    },
                     getLNumbers() {
                         var numbers = new Array(),
                             L_ticket = "",
